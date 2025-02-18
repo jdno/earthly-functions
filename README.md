@@ -1,20 +1,12 @@
-# 🚀 My Personal Template Repository
+# 🌍 Earthly Functions
 
-This is a [template repository] for my personal projects.
+This repository contains a collection of [Earthly] functions that can either be
+used as-is or as inspiration for your own function library. They are highly
+opinionated and possibly a bit over-engineered.
 
 ## License
 
-Licensed under either of
+The code in this repository is licensed under the MIT license. See the
+[LICENSE](LICENSE) file for details.
 
-- Apache License, Version 2.0 ([LICENSE-APACHE](LICENSE-APACHE) or <http://www.apache.org/licenses/LICENSE-2.0>)
-- MIT license ([LICENSE-MIT](LICENSE-MIT) or <http://opensource.org/licenses/MIT>)
-
-at your option.
-
-## Contribution
-
-Unless you explicitly state otherwise, any contribution intentionally submitted
-for inclusion in the work by you, as defined in the Apache-2.0 license, shall be
-dual licensed as above, without any additional terms or conditions.
-
-[template repository]: https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template
+[earthly]: https://earthly.dev/earthfile
