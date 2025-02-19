@@ -1,0 +1,35 @@
+VERSION 0.8
+
+PRETTIER:
+    FUNCTION
+
+    # Optionally specify the file extensions that Prettier should format
+    ARG EXTENSION="*"
+
+    # Format the files and write changes back to the local filesystem
+    ARG FIX="false"
+
+    # Optionally specify the version of Prettier that gets used
+    ARG PRETTIER_VERSION="latest"
+
+    FROM node:alpine
+    WORKDIR /project
+
+    # Install prettier
+    RUN npm install -g prettier@$PRETTIER_VERSION
+
+    # Copy the source code into the container
+    COPY . .
+
+    # Check or fix the formatting of the source code
+    LET flag = "check"
+    IF [ "$FIX" = "true" ]
+        SET flag = "write"
+    END
+
+    RUN prettier --$flag --ignore-unknown "**/*.$EXTENSION"
+
+    # Save changes back to the local filesystem
+    IF [ "$FIX" = "true" ]
+        SAVE ARTIFACT ./* AS LOCAL .
+    END
