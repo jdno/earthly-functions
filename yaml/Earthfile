@@ -1,0 +1,16 @@
+VERSION 0.8
+
+LINT:
+    FUNCTION
+
+    # Optionally specify the version of yamllint that gets used
+    ARG YAMLLINT_VERSION="latest"
+
+    FROM pipelinecomponents/yamllint:$YAMLLINT_VERSION
+    WORKDIR /project
+
+    # Copy the source code into the container
+    COPY . .
+
+    # Check the YAML files for linting errors
+    RUN yamllint .
