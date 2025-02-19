@@ -1,0 +1,19 @@
+VERSION 0.8
+
+LINT:
+    FUNCTION
+
+    # Optionally specify the version of markdownlint-cli that gets used
+    ARG MARKDOWNLINT_VERSION="latest"
+
+    FROM node:alpine
+    WORKDIR /project
+
+    # Install the markdownlint-cli
+    RUN npm install -g markdownlint-cli@$MARKDOWNLINT_VERSION
+
+    # Copy the source code into the container
+    COPY . .
+
+    # Check the Markdown files for linting errors
+    RUN markdownlint **/*.md
