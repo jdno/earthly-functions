@@ -45,8 +45,23 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run yamllint
-        uses: actionshub/yamllint@v1.8.3
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Install earthly
+        uses: earthly/actions-setup@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          version: 0.8
+
+      - name: Run check with Earthly
+        env:
+          EARTHLY_TOKEN: ${{ secrets.EARTHLY_TOKEN }}
+        run: earthly --ci --push --remote-cache=ghcr.io/jdno/earthly-functions-earthly-cache:lint-yaml +lint-yaml
 
   style:
     name: Check style
