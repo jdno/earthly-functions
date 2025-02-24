@@ -1,0 +1,28 @@
+VERSION 0.8
+
+FORMAT:
+    FUNCTION
+
+    # Format the files and write changes back to the local filesystem
+    ARG FIX="false"
+
+    # Optionally specify the version of Taplo that gets used
+    ARG TAPLO_VERSION="latest"
+
+    FROM tamasfe/taplo:$TAPLO_VERSION
+    WORKDIR /project
+
+    # Copy the source code into the container
+    COPY . .
+
+    # Check or fix the formatting of the source code
+    IF [ "$FIX" = "true" ]
+       RUN taplo fmt
+    ELSE
+        RUN taplo fmt --check
+    END
+
+    # Save changes back to the local filesystem
+    IF [ "$FIX" = "true" ]
+        SAVE ARTIFACT ./* AS LOCAL .
+    END
